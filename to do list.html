@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./to do list.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+  integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous" />
+  <title>to do list</title>
+</head>
+
+<body>
+
+  <div id="container">
+
+    <h1>To-Do List <i class="fa fa-plus" onclick="add();"></i>
+</h1>
+    <input type="text" placeholder="add task...">
+    <ul class="ul">
+      <!-- <li><span><i class="fas fa-times text-danger mr-auto delete-item" onclick="deleted();"></i></span> Item 1</li> -->
+       <!-- <li><span><i class="fas fa-times text-danger mr-auto delete-item" onclick="deleted();"></i></span> Item 2</li> -->
+        <!-- <li><span><i class="fas fa-times text-danger mr-auto delete-item" onclick="deleted();"></i></span> Item 3</li> -->
+    </ul>
+
+  </div>
+
+  <footer><button class="footer" onclick="clearing();">clear</button></footer>
+
+  <script src="./to do list.js" ></script>
+</body>
+</html>
