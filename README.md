@@ -1,2 +1,2 @@
-# to-so-list
+# to-do-list
 my first project is to so list
