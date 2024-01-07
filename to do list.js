@@ -1,46 +1,45 @@
-
-const tasklist = document.querySelector(" #container ul");
-const addbtn = document.querySelector(" .fa.fa-plus");
+const tasklist = document.querySelector("#container ul");
+const addbtn = document.querySelector(".fa.fa-plus");
 const input = document.querySelector("input");
-const bin = document.querySelectorAll(" .ul");
-const clear = document.querySelector(" .footer");
+const bin = document.querySelectorAll(".ul");
+const clear = document.querySelector(".footer");
 
- loadeventlistener();
+loadeventlistener();
 
- function loadeventlistener(){
-
-    document.addEventListener("DOMContentLoaded" , gettask);
-
+function loadeventlistener() {
+    document.addEventListener("DOMContentLoaded", gettask);
     addbtn.addEventListener("click", add);
-
     bin.forEach(function (item) {
-    item.addEventListener("click", deleted);
+        item.addEventListener("click", deleted);
     });
-
-    clear.addEventListener("click" , clearing);
- }
+    clear.addEventListener("click", clearing);
+}
 
 /*************************************************** */
 
-function gettask(){
-     let tasks;
-    if(localStorage.getItem('tasks') === null){
-        tasks = [];
-    }else{
+function gettask() {
+    let tasks;
+    if (localStorage.getItem('tasks') === null) {
+        tasks = {};
+    } else {
         tasks = JSON.parse(localStorage.getItem('tasks'));
     }
-    tasks.forEach( function (task){
-         const li = document.createElement("li");
-        const span = document.createElement("span");
-        const i = document.createElement("i");
 
-        i.className = "fas fa-times text-danger mr-auto delete-item";
-        span.appendChild(i);
-        li.appendChild(span);
-        li.appendChild(document.createTextNode(task));
-        tasklist.appendChild(li);
-    });
+    if (tasks.task) {
+        tasks.task.forEach(function (task) {
+            const li = document.createElement("li");
+            const span = document.createElement("span");
+            const i = document.createElement("i");
+
+            i.className = "fas fa-times text-danger mr-auto delete-item";
+            span.appendChild(i);
+            li.appendChild(span);
+            li.appendChild(document.createTextNode(task));
+            tasklist.appendChild(li);
+        });
+    }
 }
+
 
 /*************************************************** */
 
@@ -62,19 +61,24 @@ function add(e) {
         addlocalstrage(taskText);
 
         input.value = '';
-        e.PreventDefault();
+        e.preventDefault();
     }
 }
 
-function addlocalstrage(task){
+function addlocalstrage(tasktext) {
     let tasks;
-    if(localStorage.getItem('tasks') === null){
-        tasks = [];
-    }else{
+    if (localStorage.getItem('tasks') === null) {
+        tasks = {};
+    } else {
         tasks = JSON.parse(localStorage.getItem('tasks'));
     }
-    tasks.push(task);
-    localStorage.setItem('tasks' , JSON.stringify(tasks));
+    
+    if (!tasks.task) {
+        tasks.task = [] ;
+    }
+
+    tasks.task.push(tasktext);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 /**************************************** */
@@ -88,24 +92,27 @@ function deleted(e) {
     }
 }
 
-function deletelocalstorage(taskItem){
+function deletelocalstorage(taskItem) {
     let tasks;
-    if(localStorage.getItem('tasks') === null){
-        tasks = [];
-    }else{
+    if (localStorage.getItem('tasks') === null) {
+        tasks = {};
+    } else {
         tasks = JSON.parse(localStorage.getItem('tasks'));
     }
-    tasks.forEach(function (task , index){
-        if(taskItem.textContent === task){
-            tasks.splice(index , 1);
-        }
-    });
-    localStorage.setItem('tasks' , JSON.stringify(tasks));
+
+    if (tasks.task) {
+        tasks.task.forEach(function (task, index) {
+            if (taskItem.textContent === task) {
+                tasks.task.splice(index, 1);
+            }
+        });
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
 }
 
 /*************************************** */
 
-function clearing(){
+function clearing() {
     tasklist.innerHTML = "";
     clearlocalstorage();
 }
@@ -113,3 +120,4 @@ function clearing(){
 function clearlocalstorage() {
     localStorage.clear();
 }
+
